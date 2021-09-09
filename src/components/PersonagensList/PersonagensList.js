@@ -2,6 +2,7 @@ import PersonagensCard from "../PersonagensCard/PersonagensCard";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Api } from "../../api/Api";
+import { Link } from "react-router-dom";
 export function PersonagensList() {
   const [personagens, setPersonagens] = useState([]);
   useEffect(() => {
@@ -16,10 +17,12 @@ export function PersonagensList() {
   return (
     <div className="cards">
       {personagens.map((personagem, index) => (
-        <PersonagensCard
-          personagem={personagem}
-          key={"personagem_" + index}
-        ></PersonagensCard>
+        <Link to={`/personagem/${personagem.id}`}    key={"personagem_" + index}>
+          <PersonagensCard
+            personagem={personagem}
+            key={"personagem_" + index}
+          ></PersonagensCard>
+        </Link>
       ))}
     </div>
   );

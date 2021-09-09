@@ -25,3 +25,8 @@
     border-left: 0.25rem solid #3359ec;
     padding-left: 0.5rem;
 }
+
+.cards a{
+    text-decoration: none;
+    color: #3359ec;
+}

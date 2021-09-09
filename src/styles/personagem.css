@@ -1,0 +1,36 @@
+.personagem__container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.personagem__buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.personagem__card {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.personagem__align {
+  border: 1px solid red;
+}
+
+.personagem__img {
+  display: flex;
+  align-items: center;
+  border: 1px solid red;
+  justify-content: space-between;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.personagem__origem {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  border: 1px solid blue;
+}
