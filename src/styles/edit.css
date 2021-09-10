@@ -1,0 +1,33 @@
+.edit__title {
+  font-size: 2rem;
+  margin-top: 1rem;
+  font-weight: bolder;
+  color: #3359ec;
+  border-radius: 0.2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add__btn {
+  background-color: #25a789;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.form label {
+  font-weight: bolder;
+}
+
+.input__text {
+  border: 1px solid grey;
+  border-radius: 0.2rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+
+}

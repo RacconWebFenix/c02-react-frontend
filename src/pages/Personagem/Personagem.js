@@ -1,18 +1,14 @@
 import { Api } from "api/Api";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../../styles/personagem.css";
 
-export default function Personagem() {
+export default function Personagem(props) {
   const { id } = useParams();
 
   const [personagem, setPersonagem] = useState("");
   const [loading, setLoading] = useState(true);
- 
-  
-  console.log(personagem);
-  
-  
+
   useEffect(() => {
     const loadData = async () => {
       const response = await Api.buildApiGetRequest(Api.readOneUrl(id));
@@ -22,6 +18,7 @@ export default function Personagem() {
     };
     loadData();
   }, [id]);
+  console.log(personagem);
 
   if (loading) {
     return (
@@ -31,21 +28,29 @@ export default function Personagem() {
     );
   }
 
+  const deleteF = async () => {
+    let del = window.confirm("Você realmente deseja Excluir?");
+    if (del === true) {
+      await Api.buildApiDeleteRequest(Api.deleteUrl(id));
+      props.history.push(`/`);
+    }
+  };
+
   return (
     <div className="personagem__container">
       <div className="personagem__card">
-        <div className="personagem__align">
-          <div className="personagem__buttons">
-            <button>Editar</button>
-            <button>Excluir</button>
-          </div>
-          <div>{personagem.nome}</div>
-          <div className="personagem__img">
+        <div className="personagem__buttons">
+          <Link to={`/edit/${id}`}>Editar</Link>
+          <button onClick={deleteF}>Excluir</button>
+        </div>
+        <span className="personagem__name">{personagem.nome}</span>
+        <div className="person__innerAll">
+          <div className="personagem__inner">
             <img src={personagem.imagemUrl} alt={personagem.nome} />
-            <div className="personagem__origem">
-              <span>Origem</span>
-              {personagem.origem.nome}
-            </div>
+          </div>
+          <div className="personagem__origem">
+            <span>Origem</span>
+            {personagem.origem.nome}
           </div>
         </div>
       </div>

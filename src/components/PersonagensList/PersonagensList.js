@@ -17,7 +17,7 @@ export function PersonagensList() {
   return (
     <div className="cards">
       {personagens.map((personagem, index) => (
-        <Link to={`/personagem/${personagem.id}`}    key={"personagem_" + index}>
+        <Link to={`/view/${personagem.id}`}    key={"personagem_" + index}>
           <PersonagensCard
             personagem={personagem}
             key={"personagem_" + index}
