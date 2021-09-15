@@ -7,7 +7,7 @@ export function PersonagensList() {
   const [personagens, setPersonagens] = useState([]);
   useEffect(() => {
     const loadData = async () => {
-      const response = await Api.buildApiGetRequest(Api.readAllUrl());
+      const response = await Api.buildApiGetRequest(Api.readAllUrl(), true);
       const bodyResult = await response.json();
       setPersonagens(bodyResult);
     };
@@ -17,7 +17,7 @@ export function PersonagensList() {
   return (
     <div className="cards">
       {personagens.map((personagem, index) => (
-        <Link to={`/view/${personagem.id}`}    key={"personagem_" + index}>
+        <Link to={`/view/${personagem.id}`} key={"personagem_" + index}>
           <PersonagensCard
             personagem={personagem}
             key={"personagem_" + index}

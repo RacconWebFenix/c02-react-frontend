@@ -6,8 +6,6 @@ import { useState } from "react";
 export function AddPersonagem(props) {
   const [previewImage, setPreviewImage] = useState("");
 
-
-
   const [localizacao, setLocalizacao] = useState([]);
 
   // const [loading, setLoading] = useState(true);
@@ -15,7 +13,8 @@ export function AddPersonagem(props) {
   useEffect(() => {
     const loadData = async () => {
       const response = await Api.buildApiGetRequest(
-        Api.readAllUrlLocalizacao()
+        Api.readAllUrlLocalizacao(),
+        true
       );
       const bodyResult = await response.json();
       setLocalizacao(bodyResult);
@@ -57,7 +56,7 @@ export function AddPersonagem(props) {
         <br />
 
         <input type="text" id="nome" name="nome" className="form__input" />
-      
+
         <br />
         <label htmlFor="imagemUrl" className="form__label">
           URL da Imagem:
@@ -92,10 +91,11 @@ export function AddPersonagem(props) {
 
         <select id="origemId" name="origemId">
           <option value="">Selecione uma opção</option>
-          {localizacao.map((loc, i) => <option key={"localizacao_" + i} value={loc.id}>
+          {localizacao.map((loc, i) => (
+            <option key={"localizacao_" + i} value={loc.id}>
               {loc.nome}
             </option>
-          )}
+          ))}
         </select>
 
         <input

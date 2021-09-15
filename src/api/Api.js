@@ -6,15 +6,24 @@ export const Api = {
   createUrl: () => Api.baseUrl + "/personagem/",
   //login
   loginUrl: () => Api.baseUrl + "/login/",
-  
-  deleteUrl: (id) => Api.baseUrl + `/personagem/${id}`,
 
+  deleteUrl: (id) => Api.baseUrl + `/personagem/${id}`,
 
   readAllUrlLocalizacao: () => Api.baseUrl + "/localizacao",
 
-  buildApiGetRequest: (url) =>
+  //authHeadert
+  authHeader: {
+    Authorization: "Bearer " + localStorage.getItem("JWT"),
+  },
+
+  buildApiGetRequest: (url, auth) =>
     fetch(url, {
       method: "GET",
+      headers: auth
+        ? new Headers({
+            ...Api.authHeader,
+          })
+        : undefined,
     }),
 
   buildApiPutRequest: (url, body) => {
