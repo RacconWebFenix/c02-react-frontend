@@ -1,29 +1,47 @@
 import { Api } from "api/Api";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 
 export function AddPersonagem(props) {
   const [previewImage, setPreviewImage] = useState("");
+
+
+
+  const [localizacao, setLocalizacao] = useState([]);
+
+  // const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await Api.buildApiGetRequest(
+        Api.readAllUrlLocalizacao()
+      );
+      const bodyResult = await response.json();
+      setLocalizacao(bodyResult);
+      // setLoading(false);
+    };
+    loadData();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const nome = event.target.nome.value;
     const imagemUrl = event.target.imagemUrl.value;
-    const origemId = parseInt(event.target.origemId.value);
+    const origemId = +event.target.origemId.value;
 
     const dados = {
       nome,
       imagemUrl,
       origemId,
     };
-    console.log(dados)
+    console.log(dados);
     const resultado = await Api.buildApiPostRequest(Api.createUrl(), dados);
 
     const jsonResultado = await resultado.json();
 
     props.history.push(`/view/${jsonResultado.id}`);
-
   };
 
   const updatePreview = (event) => {
@@ -39,13 +57,7 @@ export function AddPersonagem(props) {
         <br />
 
         <input type="text" id="nome" name="nome" className="form__input" />
-        <br />
-
-        <label htmlFor="origemId" className="form__label">
-          OrigemId:
-        </label>
-        <br />
-        <input type="number" id="origemId" name="origemId" />
+      
         <br />
         <label htmlFor="imagemUrl" className="form__label">
           URL da Imagem:
@@ -73,7 +85,18 @@ export function AddPersonagem(props) {
         ) : (
           ""
         )}
+        <label htmlFor="origemId" className="form__label">
+          OrigemId:
+        </label>
         <br />
+
+        <select id="origemId" name="origemId">
+          <option value="">Selecione uma opção</option>
+          {localizacao.map((loc, i) => <option key={"localizacao_" + i} value={loc.id}>
+              {loc.nome}
+            </option>
+          )}
+        </select>
 
         <input
           type="submit"

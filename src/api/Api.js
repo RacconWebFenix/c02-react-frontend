@@ -6,6 +6,9 @@ export const Api = {
   createUrl: () => Api.baseUrl + "/personagem/",
   deleteUrl: (id) => Api.baseUrl + `/personagem/${id}`,
 
+
+  readAllUrlLocalizacao: () => Api.baseUrl + "/localizacao",
+
   buildApiGetRequest: (url) =>
     fetch(url, {
       method: "GET",

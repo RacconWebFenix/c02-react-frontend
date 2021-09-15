@@ -5,13 +5,16 @@ import logoBlue from "./img/logo-blue.gif";
 
 // CSS
 import "./App.css";
-import Personagem from "pages/Personagem/Personagem";
+import Personagem from "pages/Personagem/ReadOnePersonagem/Personagem";
 
-import { AddPersonagem } from "./pages/Personagem/AddPersonagem";
+import { AddPersonagem } from "./pages/Personagem/AddPersonagem/AddPersonagem";
 
-import EditPersonagem from "pages/Personagem/EditPersonagem";
+import EditPersonagem from "pages/Personagem/EditPersonagem/EditPersonagem";
+import RemoverPersonagem from "pages/Personagem/RemoverPersonagem/RemoverPersonagem";
+import GuardedRoute from "components/GuardedRoute/GuardedRoute";
 
 export function App() {
+  const isAuthenticated = true;
   return (
     <div className="App">
       <header className="App-header">
@@ -22,7 +25,17 @@ export function App() {
           <Route path="/" exact={true} component={Home} />
           <Route path="/view/:id" exact={true} component={Personagem} />
           <Route path="/edit/:id" exact={true} component={EditPersonagem} />
-          <Route path="/create/" exact={true} component={AddPersonagem} />
+          <GuardedRoute
+            path="/create/"
+            exact={true}
+            component={AddPersonagem}
+            auth={isAuthenticated}
+          />
+          <Route
+            path="/remover/:id"
+            exact={true}
+            component={RemoverPersonagem}
+          />
         </Switch>
       </div>
     </div>

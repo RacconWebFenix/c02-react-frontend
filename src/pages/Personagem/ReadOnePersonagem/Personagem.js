@@ -1,26 +1,29 @@
 import { Api } from "api/Api";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import "../../styles/personagem.css";
+import { Link } from "react-router-dom";
+import "./personagem.css";
 
 export default function Personagem(props) {
-  const { id } = useParams();
+  const id = props.match.params.id
+ 
 
-  const [personagem, setPersonagem] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [personagem, setPersonagem] = useState(undefined);
+  const isLoading = personagem === undefined 
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
       const response = await Api.buildApiGetRequest(Api.readOneUrl(id));
       const bodyResult = await response.json();
       setPersonagem(bodyResult);
-      setLoading(false);
+      // setLoading(false);
     };
     loadData();
   }, [id]);
+  
   console.log(personagem);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div>
         <h1>Carregando Personagem...</h1>

@@ -2,13 +2,12 @@ import { Api } from "api/Api";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import "../../styles/edit.css";
+import "./edit.css";
 
 export default function EditPersonagem(props) {
-  const { id } = useParams();
+  const id = props.match.params.id
 
-  const [personagem, setPersonagem] = useState("");
+  const [personagem, setPersonagem] = useState(undefined);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
