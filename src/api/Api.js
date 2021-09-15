@@ -4,6 +4,9 @@ export const Api = {
   readAllUrl: () => Api.baseUrl + "/personagem",
   readOneUrl: (id) => Api.baseUrl + `/personagem/${id}`,
   createUrl: () => Api.baseUrl + "/personagem/",
+  //login
+  loginUrl: () => Api.baseUrl + "/login/",
+  
   deleteUrl: (id) => Api.baseUrl + `/personagem/${id}`,
 
 
